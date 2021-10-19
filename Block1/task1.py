@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 
+# https://www.wsj.com/market-data/quotes/fx/EURUSD/historical-prices
+# https://www.wsj.com/market-data/quotes/fx/EURRUB/historical-prices
 # Date, Open, High, Low, Close
 with open("HistoricalPrices2.csv") as csv_:
     # поиск параметров регрессии
@@ -15,11 +17,11 @@ with open("HistoricalPrices2.csv") as csv_:
     print(f"Regression function: C = {b0} {'+' if b1 > 0 else '-'} {abs(b1)} * t + e")
 
     # коэфициент детерминации
-    y_ = y_/N
+    y_ = y_ / N
     sse = sum(map(lambda s: (s[0] - s[1]) * (s[0] - s[1]), [[y[i], b0 + b1 * x[i]] for i in range(N)]))
     sst = sum(map(lambda s: (s[0] - s[1]) * (s[0] - s[1]), [[y[i], y_] for i in range(N)]))
     r2 = 1 - sse / sst
-    r2_adj = 1 - (1-r2) * (N-1)/(N-2)
+    r2_adj = 1 - (1 - r2) * (N - 1) / (N - 2)
     print(f"R^2 = {r2}")
     print(f"Adjusted R^2 = {r2_adj}")
     # графики
